@@ -23,7 +23,7 @@ export class ProductEntity extends BaseEntity {
   @Column()
   price: number;
 
-  @Column({ type: 'varchar', default: ProductStatusEnum.ACTIVE })
+  @Column({ type: 'varchar', default: ProductStatusEnum.IN_STOCK })
   status: ProductStatusEnum;
 
   @CreateDateColumn()
