@@ -6,6 +6,7 @@ import { ProductsController } from './controllers/products.controller';
 import { FindProductsService } from './services/find-products.service';
 import { UpdateProductService } from './services/update-product.service';
 import { DeleteProductService } from './services/delete-product.service';
+import { FindProductByIdService } from './services/find-product-by-id.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([ProductEntity])],
@@ -14,6 +15,7 @@ import { DeleteProductService } from './services/delete-product.service';
     FindProductsService,
     UpdateProductService,
     DeleteProductService,
+    FindProductByIdService,
   ],
   controllers: [ProductsController],
 })

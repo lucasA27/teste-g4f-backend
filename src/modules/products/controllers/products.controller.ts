@@ -28,6 +28,8 @@ import {
   ApiResponseSuccessFind,
   ApiResponseSuccessUpdate,
 } from 'src/swagger/commons/common-success.responses';
+import { Pagination } from 'nestjs-typeorm-paginate';
+import { FindProductByIdService } from '../services/find-product-by-id.service';
 
 @Controller('products')
 export class ProductsController {
@@ -36,6 +38,7 @@ export class ProductsController {
     private readonly findProductsService: FindProductsService,
     private readonly updatedProductService: UpdateProductService,
     private readonly deleteProductService: DeleteProductService,
+    private readonly findProductById: FindProductByIdService,
   ) {}
 
   @ApiOperation({ summary: 'Criar um novo produto' })
@@ -49,8 +52,15 @@ export class ProductsController {
   @ApiResponse(ApiResponseSuccessFind)
   @ApiResponse(ApiResponseProductNotFound)
   @Get()
-  async findProducts(@Query() data: FindProductDto): Promise<ProductEntity[]> {
+  async findProducts(
+    @Query() data: FindProductDto,
+  ): Promise<Pagination<ProductEntity>> {
     return await this.findProductsService.perform(data);
+  }
+
+  @Get(':id')
+  async findProduct(@Param('id', ParseIntPipe) id: number) {
+    return this.findProductById.perform(id);
   }
 
   @ApiResponse(ApiResponseSuccessUpdate)

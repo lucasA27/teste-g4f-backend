@@ -4,6 +4,14 @@ import { ProductStatusEnum } from 'src/database/enums/product-status.enum';
 
 export class FindProductDto {
   @ApiProperty({
+    description: 'ID do produto',
+    required: false,
+    example: 10,
+  })
+  @IsOptional()
+  id: number;
+
+  @ApiProperty({
     description: 'Nome do produto',
     required: false,
     example: 'Cadeira Gamer',
@@ -72,4 +80,12 @@ export class FindProductDto {
       'O campo preço deve ser "ASC" para ascendente ou "DESC" para descendente',
   })
   priceOrder: 'ASC' | 'DESC';
+
+  @IsOptional()
+  @IsString({ message: 'O campo pagina deve ser uma string' })
+  page: number;
+
+  @IsOptional()
+  @IsString({ message: 'O campo limite deve ser uma string' })
+  limit: number;
 }
